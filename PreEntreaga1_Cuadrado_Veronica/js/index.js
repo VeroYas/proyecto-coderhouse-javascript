@@ -17,7 +17,6 @@ let producto1 = 5;
 let producto2 = 8;
 let producto3 = 10;
 
-
 do{
     clave = prompt("ingresa la contrasena '123'");
     intentos ++;
