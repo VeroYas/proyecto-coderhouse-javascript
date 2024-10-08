@@ -1,65 +1,63 @@
-/**EL USUARIO VA A COMPRAR PRODUCTOS
- *  - iniciar sesión
- *  - Card con producos y precio
- *  - botón de comprar
- *  - producto se cargue en un carrito de compras y se almacene en este
- *  - sumar los diferentes productos que seleccione el usuario
- *  - Mostrar el valor final 
- *  - forma de pagar el producto
- *  - Vaciar el carrito de compras
- */
+const productos = [
+    { nombre: 'Aretes Flor', precio: 8 },
+    { nombre: 'Aretes Rombo', precio: 8 },
+    { nombre: 'Adorno Navideño - Bombillos', precio: 10 },
+    { nombre: 'Adorno Navideño - Bota', precio: 10 },
+    { nombre: 'Flores - rosas', precio: 6 },
+    { nombre: 'Flores - girasoles', precio: 9 }
+]
 
-let clave;
-let intentos = 0;
-const MAX_INTENTOS = 3;
-let suma = 0;
-let producto1 = 5;
-let producto2 = 8;
-let producto3 = 10;
+function mostrarProductos() {
+    console.log("Bienvenido a Creaciones VYCS");
+    console.log("Lista de productos:");
+    console.log("1. Producto: Aretes Flor - Costo: $8");
+    console.log("2. Producto: Aretes Rombo - Costo: $8");
+    console.log("3. Producto: Adorno Navideño - Bombillos - Costo: $10");
+    console.log("4. Producto: Adorno Navideño - Bota - Costo: $10");
+    console.log("5. Producto: Flores - rosas - Costo: $6");
+    console.log("6. Producto: Flores - girasoles - Costo: $9");
+}
 
-do{
-    clave = prompt("ingresa la contrasena '123'");
-    intentos ++;
+function obtenerPrecioProducto(opcion) {
+    if (opcion === 1) return 8;
+    if (opcion === 2) return 8;
+    if (opcion === 3) return 10;
+    if (opcion === 4) return 10;
+    if (opcion === 5) return 6;
+    if (opcion === 6) return 9;
+    return 0; 
+}
 
-    if (clave === '123'){
-        alert("contrasena correcta")
+function main() {
+    let costoTotal = 0;
+    let seguirComprando = true;
+
+    while (seguirComprando) {
+        mostrarProductos();
         
-        do{
-            imput = prompt("Seleccione el producto que desee comprar: producto1 - valor $5, producto2 - valor $8, producto3 - valor $10. Si desea terminar la seleccion escriba la palabra 'comprar'.")
-                
-            if(imput.toLowerCase() === 'producto1'){
-                suma = producto1;
-            }
-            if(imput.toLowerCase() === 'producto2'){
-                suma = producto1 + producto2;
-            }
-            if(imput.toLowerCase() === 'producto3'){
-                suma = producto1 + producto2 + producto3;
-            }
-            if(imput.toLowerCase() === 'comprar'){
-                break;
-                console.log(suma);
-            }
-        }while(true);
+        let opcion = parseInt(prompt("Selecciona el número del producto que deseas (1, 2, 3, 4, 5, o 6):"));
         
-        alert("El valor total a pagar es " + suma);
-        
-        pagar = prompt("Seleccione 'pagar' para realizar la compra");
-        
-        if (pagar === 'pagar'){
-            alert("Gracias por su compra");
-            suma = 0;
-        } 
-        else {
-            alert(pagar);
+        if (opcion >= 1 && opcion <= 6) {
+            costoTotal += obtenerPrecioProducto(opcion);
+        } else {
+            console.log("Opción no válida. Intenta de nuevo.");
+            continue;
         }
-        break;
+        
+        let respuesta = prompt("¿Deseas seleccionar otro producto? (si/no):").toLowerCase();
+        if (respuesta !== "si") {
+            seguirComprando = false;
+        }
     }
+    
+    console.log("El costo total de los productos seleccionados es: $" + costoTotal.toFixed(2));
 
-    if (intentos >= MAX_INTENTOS){
-        alert("la cantidad de intentos se alcanzo")
-        break;
+    let pagar = prompt("¿Deseas pagar el valor? (si/no):").toLowerCase();
+        if (pagar === "si") {
+            console.log("Gracias por su compra");
+        } else if (pagar === "no"){
+        console.log("Vuelve pronto");
         }
+}
 
-}while(true);
-
+main();
